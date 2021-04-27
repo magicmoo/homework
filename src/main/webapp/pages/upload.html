@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="../webjars/jquery/3.3.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>upload</title>
+    <style>
+        div{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+    </style>
+    <script>
+        $(function () {
+            $.ajax({
+                type: "get",
+                url: "/getClasses",
+                success:function (data) {
+                    $.each(data,function (i,n) {
+                        $("#class").append("<option value='"+n.name+"'>"+n.name+"</option>");
+                    })
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<div>
+    <form action="/upload" enctype="multipart/form-data" method="post">
+        请选择班级
+        <select name="classroom">
+            <!--                <option value="j4">计科四班</option>-->
+            <option value="计科五班">计科五班</option>
+        </select>
+        <br>
+        请选择作业类型
+        <select name="cName" id="class">
+        </select>
+        <br>
+        <br>
+        班级内序号
+        <input type="text" name="id">
+        <br>
+        请选择文件
+        <input type="file" name="file">
+        <br>
+        <input type="submit" value="提交">
+    </form>
+</div>
+</body>
+</html>
